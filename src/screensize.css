@@ -1,0 +1,98 @@
+@media (min-width: 768px) {
+    .card_t{
+        margin-top: 25px;
+    }
+    .card_c{
+        margin-top: -20px;
+    }
+    .about-info{
+        padding-top: 70px;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .card_t{
+        margin-top: 25px;
+    }
+    .card_c{
+        margin-top: -20px;
+    }
+    .about-info{
+        padding-top: 70px;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .card_t{
+        margin-top: 25px;
+    }
+    .card_c{
+        margin-top: -20px;
+    }
+    .about-info{
+        padding-top: 70px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    /*Navigation*/
+    .register-btn{
+        display: none;
+    }
+    .link{
+        height: 50px;
+    }
+    .link a{
+        margin-left: 10px;
+        margin-top: 20px;
+    }
+    .link:hover{
+        background-color: #FF8247;
+    }
+    .link:hover a{
+        color: #FFF;
+    }
+    .nav-item-btn{
+        margin-left: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    /*Intro*/
+    .intro{
+        height: 320px;
+      }
+      .intro img{
+        height: 100%;
+      }
+      .carousel-item{
+        height: 320px;
+      }
+      .carousel-inner{
+        height: 320px;
+      }
+    .carousel-title {
+        font-size: 22px;
+        position: absolute;
+        top: 18%; 
+    }
+      .carousel-header{
+        font-size: 35px;
+        color: #33BBFF;
+        position: absolute; 
+        top: 28%; 
+        animation: fadeDown 1s forwards;
+      }
+      .carousel-p{
+        font-size: 13px;
+        position: absolute; 
+        top: 43%; 
+        width: 60%;
+        opacity: 1;
+        animation: fadeDown 2s forwards;
+      }
+      .carousel-btn{
+        position: absolute; 
+        top: 65%; 
+        width: 200px;
+      }
+  }
