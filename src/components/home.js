@@ -8,6 +8,40 @@ import c_7 from '../images/c_7.jpeg';
 import { Link } from "react-router-dom";
 
 class Home extends Component{
+
+    constructor(){
+        super()
+        this.state = {
+            selection_intro: 'Usafi helps you connect to clients and as a client you can connect to other clients and job providers'
+        };
+    }
+
+    setContent(pos){
+             if(pos === 1){
+                this.setState({
+                    position: 1,
+                    selection_intro: 'Usafi helps you connect to clients and as a client you can connect to other clients and job providers.'
+               });
+             }
+             else if(pos === 2){
+                this.setState({
+                    selection_intro: "Usafi helps in marketing a company's services to all the users of the system which includes potential clients to the services. "
+               });
+             }
+             else if(pos === 3){
+                this.setState({
+                    position: 1,
+                    selection_intro: 'Usafi helps you manage your company, clients and services. You can also generate reports of your service company performance.'
+               });
+             }
+             else{
+                this.setState({
+                    selection_intro: 'Usafi helps y'
+               });
+             }
+      
+    }
+
     render(){
         return(
             <div className='body'>
@@ -145,6 +179,21 @@ class Home extends Component{
                              <center>
                                  <h3 className='services-title'>OUR SERVICES</h3>
                              </center>
+                             <div className='row'>
+                                <div className='col-md-4'>
+                                    <div className='selections'>
+                                    <p onClick={() => this.setContent(1)}><i className='fa fa-comments' style={{ color: '' }}></i>Networking</p>
+                                    <p onClick={() => this.setContent(2)}><i className='fa fa-pie-chart' style={{ color: '' }}></i>Marketing</p>
+                                    <p onClick={() => this.setContent(3)}><i className='fa fa-pie-chart' style={{ color: '' }}></i>Management</p>
+                                    <p onClick={() => this.setContent(4)}><i className='fa fa-pie-chart' style={{ color: '' }}></i>Marketing</p>
+                                    </div>
+                                </div>
+                                <div className='col-md-8'>
+                                <div className='selections-content'>
+                                    <p>{this.state.selection_intro}</p>
+                                </div>
+                                </div>
+                             </div>
                          </div>
                      </div>
                  </div>

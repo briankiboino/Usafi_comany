@@ -95,4 +95,8 @@
         top: 65%; 
         width: 200px;
       }
+      /*Services section*/
+      .selections{
+        border: none;
+      }
   }

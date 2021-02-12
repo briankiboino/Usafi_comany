@@ -15,13 +15,13 @@ class Footer extends Component{
                     </div>
                     <div className='col-md-4'>
                         <h4>Quick links</h4>
-                        <i className='fa fa-chevron-right starter'></i> <Link to='/' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Home</Link>
+                        <i className='fa fa-chevron-right starter'></i><Link to='/' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Home</Link>
                         <hr></hr>
-                        <i className='fa fa-chevron-right'></i> <Link to='/contact' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Contact Us</Link>
+                        <i className='fa fa-chevron-right'></i><Link to='/contact' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Contact Us</Link>
                         <hr></hr>
-                        <i className='fa fa-chevron-right'></i> <Link to='/signin' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Sign in</Link>
+                        <i className='fa fa-chevron-right'></i><Link to='/signin' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Sign in</Link>
                         <hr></hr>
-                        <i className='fa fa-chevron-right'></i> <Link to='/signup' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Sign up</Link>
+                        <i className='fa fa-chevron-right'></i><Link to='/signup' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Sign up</Link>
                         <hr></hr>
                     </div>
                     <div className='col-md-4'>
