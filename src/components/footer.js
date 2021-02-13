@@ -10,7 +10,7 @@ class Footer extends Component{
                     <div className='col-md-4'>
                        <h4 className='footer-logo'>Usafi</h4>
                        <p className='starter'>
-                           Welcome to Usafi.Connect with your customers anywhere in the world with Pepea SMS. Engage and interact with them via Bulk SMS, SMS Gateway and MMS Broadcast. Simply create an account, upload your contacts and start sending and receiving messages in just a few minutes.
+                           Welcome to Usafi. A powerful intelligent tool that helps you to requests laundry services and get clients from all over Africa. Simply the best in the market. Dont miss out, register with us today.
                        </p>
                     </div>
                     <div className='col-md-4'>
@@ -21,7 +21,7 @@ class Footer extends Component{
                         <hr></hr>
                         <i className='fa fa-chevron-right'></i><Link to='/signin' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Sign in</Link>
                         <hr></hr>
-                        <i className='fa fa-chevron-right'></i><Link to='/signup' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Sign up</Link>
+                        <i className='fa fa-chevron-right'></i><Link to='/signin' style={{ textDecoration: 'none', color: '#E3E3E3' }}>Sign up</Link>
                         <hr></hr>
                     </div>
                     <div className='col-md-4'>

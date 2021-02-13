@@ -49,7 +49,7 @@
     .link:hover{
         background-color: #FF8247;
     }
-    .link:hover a{
+    .link-btn:hover{
         color: #FFF;
     }
     .nav-item-btn{
@@ -92,11 +92,14 @@
       }
       .carousel-btn{
         position: absolute; 
-        top: 65%; 
+        top: 70%; 
         width: 200px;
       }
       /*Services section*/
       .selections{
         border: none;
+      }
+      .services-card{
+        height: 830px;
       }
   }

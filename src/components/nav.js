@@ -5,7 +5,7 @@ class Navigation extends Component{
     render(){
         return(
             <div className='container'>
-            <nav className='navbar navbar-expand-lg absolute transparent'>
+            <nav className='navbar navbar-expand-lg absolute transparent' id='header'>
                 <div className="container-fluid">
                 <Link to='/' style={{ textDecoration: 'none'}}><h1 className="logo mr-auto" href="#">Usafi</h1></Link>
                 <button className="navbar-toggler navbar-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,22 +17,21 @@ class Navigation extends Component{
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item link">
-                            <Link to='/' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'>Home</a></Link>
+                        <Link to='/' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'><button className='link-btn'>Home</button></a></Link></li>
+                        <li class="nav-item link">
+                            <Link to='/' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'><button className='link-btn'>Features</button></a></Link>
                         </li>
                         <li class="nav-item link">
-                            <Link to='/' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'>Features</a></Link>
+                            <Link to='/' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'><button className='link-btn'>Pricing</button></a></Link>
                         </li>
                         <li class="nav-item link">
-                            <Link to='/' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'>Pricing</a></Link>
-                        </li>
-                        <li class="nav-item link">
-                            <Link to='/contact' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'>Contact Us</a></Link>
+                            <Link to='/contact' style={{ textDecoration: 'none' }}><a className='nav-links fadeInAndOut'><button className='link-btn'>Contact Us</button></a></Link>
                         </li>
                         <li class="nav-item nav-item-btn">
                             <Link to='/signin'><a><button className='btn btn-primary btn-sm login-btn fadeInDown'>Sign in</button></a></Link>
                         </li>
                         <li class="nav-item">
-                        <Link to='/signup'><a><button className='btn btn-outline-primary btn-sm btn-light register-btn fadeInUp'>Get Started</button></a></Link>
+                        <Link to='/signin'><a><button className='btn btn-outline-primary btn-sm btn-light register-btn fadeInUp'>Get Started</button></a></Link>
                         </li>
                     </ul>
                     </div>
