@@ -3,6 +3,7 @@ import '../signin_up.css';
 import rocket from '../images/rocket.svg';
 import desk from '../images/desk.svg';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Signin extends Component {
 
@@ -31,14 +32,24 @@ class Signin extends Component {
             alert("Password cannot be empty!!");
         }
         if(this.state.email !== null  && !this.state.password !== null){
+            var data = {
+              email: this.state.email,
+              password: this.state.password
+            }
+            console.log(data);
+            fetch("/api/users/login", {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: {
+                "Content-Type": "application/json"
+              },
+              credentials: "same-origin"
+            }).then(function(response) {
+              console.log(response.message)
+            }, function(error) {
+             console.log(error);
+            })
             
-            axios.post(`http://localhost:4200/api/users/login`, this.state)
-            .then(response => {
-                console.log(response.data);
-            })
-            .catch(error =>{
-                console.log(console.error());
-            })
         }
     }
 
@@ -57,7 +68,7 @@ class Signin extends Component {
         }
         if(this.state.n_email !== null  && !this.state.n_password !== null){
             event.preventDefault();
-            axios.post('https://jsonplaceholder.typicode.com/posts', this.state)
+            axios.get('https://jsonplaceholder.typicode.com/posts', this.state)
             .then(response => {
                 console.log(response);
             })
@@ -96,7 +107,8 @@ class Signin extends Component {
               <i className="fas fa-lock"></i>
               <input type="password" placeholder="Password" name='password' value={this.state.password} onChange={this.handlerSignin}/>
             </div>
-            <input type="submit" value="Login" className="btn solid sign-in-btn" onClick={() => this.handlerSubmitsignin()}/>
+            <input type="submit" value="Login" className="btn solid" onClick={() => this.handlerSubmitsignin()}/>
+            <Link to='/forgot' style={{ textDecoration: 'none' }}><a className='forgot-link'>Forgot password?</a></Link>
             <p className="social-text">Or Sign in with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">

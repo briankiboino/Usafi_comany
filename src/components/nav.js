@@ -8,7 +8,7 @@ class Navigation extends Component{
             <nav className='navbar navbar-expand-lg absolute transparent' id='header'>
                 <div className="container-fluid">
                 <Link to='/' style={{ textDecoration: 'none'}}><h1 className="logo mr-auto" href="#">Usafi</h1></Link>
-                <button className="navbar-toggler navbar-success" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="fa fa-bars toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">

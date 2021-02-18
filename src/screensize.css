@@ -102,4 +102,8 @@
       .services-card{
         height: 830px;
       }
+      /*Contact page*/
+      .contact-form .input-field{
+        margin-bottom: 10px;
+      }
   }

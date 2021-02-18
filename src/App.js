@@ -8,6 +8,7 @@ import Home from './components/home';
 import Contact from './components/contact';
 import Signin from './components/signin';
 import Totop from './components/to_top';
+import Forgot from './components/forgot';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
 
@@ -16,9 +17,10 @@ function App() {
     <Router>
       <Switch>
           <Route path='/signin' exact component={Signin}/>
+          <Route path='/forgot' exact component={Forgot}/>
+          <Route path='/contact' exact component={Contact}/>
           <div className="App">
               <Navigation />
-              <Route path='/contact' exact component={Contact}/>
               <Route path='/' exact component={Home}/>
               <Totop />
               <Footer />

@@ -13,15 +13,17 @@ html {
 }
 /*Navigation bar*/
 .navbar{
-  align-items: center;
   color: #000;
   z-index: 9;
+  opacity: 8;
 }
 .navbar-toggler{
   background-color: #EE7942;
   height: 45px;
   width: 50px;
-  outline: none;
+}
+.navbar-toggler:focus{
+  outline-style: none;
 }
 .navbar-toggler:hover{
   background-color: #33BBFF;
@@ -32,14 +34,16 @@ html {
 .link-btn{
   background-color: transparent;
   border: none;
-  outline: none;
   height: 49px;
   border-radius: 49px;
   color: #000;
   cursor: pointer;
   transition: 0.5s;
   margin-left: 10px;
- margin-right: 15px;
+  margin-right: 15px;
+}
+.link-btn:focus{
+  outline-style: none;
 }
 .link-btn:hover{
   color: orange;
@@ -144,7 +148,7 @@ html {
 }
 /*About us section*/
 .about{
-  background-color: #EDEDED;
+  background-color: #f3fafc;
 }
 .cols{
   margin-top: 30px;
@@ -256,7 +260,6 @@ html {
 /*Back to top button*/
 .back-to-top {
   position: fixed;
-  
   background: #18d26e;
   color: #fff;
   width: 44px;
@@ -268,15 +271,135 @@ html {
   right: 15px;
   bottom: 15px;
   transition: background 0.5s;
-  z-index: 11;
+  z-index: 15;
 }
 .back-to-top i {
   padding-top: 12px;
   color: #fff;
 }
+/*Contact page*/
+.contact-section{
+  position: relative;
+}
+.contact-intro{
+  width: 100%;
+  height: 360px;
+  position: absolute;
+  background-image:
+  linear-gradient(to bottom, rgba(201, 228, 250, 0.52), rgba(245, 235, 243, 0.5)),
+  url('./images/c_6.jpeg');
+  background-size: cover;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-position-y: 6%;
+}
+.contact-intro-image{
+  position: absolute;
+  background-size: cover;
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-position-y: 2%;
+}
+.contact-header{
+  position: relative;
+  top: 25%;
+  left: 10px;
+}
+.contact-content{
+  position: relative;
+  top: 380px;
+}
+.contact-form p{
+  margin: 20px;
+}
+.contact-form h2{
+  color: #036292;
+  margin: 20px;
+}
+.contact-form .input-field {
+  width: 100%;
+  background-color: #f0f0f0;
+  margin-bottom: 30px;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.contact-form .input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+}
+
+.contact-form .input-field input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.contact-form .input-field input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+.contact-form textarea{
+  width: 100%;
+  background-color: #f0f0f0;
+  height: 200px;
+  border-radius: 35px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+  outline: 0;
+  border: none;
+  padding: 20px;
+}
+.contact-form textarea::placeholder{
+  color: #aaa;
+  font-weight: 500;
+}
+.map-col{
+  margin-top: 25px;
+}
+.send-btn{
+  width: 100px;
+  background-color: #5995fd;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #fff;
+  font-weight: 400;
+  margin-top: 25px;
+  margin-left: 20px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.send-btn:hover{
+  background-color: #052d74;
+  color: #FFF;
+}
+.contact-extra{
+  position: relative;
+  top: 430px;
+  background-color: rgb(228, 242, 252);
+}
+.contact-footer{
+  position: relative;
+  top: 620px;
+}
 /*Footer*/
 .footer{
-  background-color: #333;
+  background-color: rgb(14, 12, 12);
   color: #E3E3E3;
   font-size: 14px;
 }
