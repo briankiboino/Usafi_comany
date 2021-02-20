@@ -162,7 +162,7 @@ form.sign-in-form {
 .sign-in-up:before {
   content: "";
   position: absolute;
-  height: 2000px;
+  height: 2170px;
   width: 2000px;
   top: -10%;
   right: 48%;
@@ -190,7 +190,7 @@ form.sign-in-form {
 
 .left-panel {
   pointer-events: all;
-  padding: 3rem 17% 2rem 12%;
+  padding: 3rem 30% 2rem 12%;
 }
 
 .right-panel {
@@ -295,7 +295,7 @@ form.sign-in-form {
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    padding: 2.5rem 8%;
+    padding: 1rem 20%;
     grid-column: 1 / 2;
   }
 

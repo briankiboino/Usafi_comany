@@ -71,6 +71,15 @@
    }
   }
 
+  @keyframes fadeDownerrors {
+    0% {
+      transform: translateY(50px);
+   }
+   100% {
+      transform: translateX(0);
+   }
+  }
+
   @keyframes slideUp {
   0% {
       transform: translateY(100%);
@@ -91,3 +100,4 @@
       transform: translateY(0%);
   }   
   }
+ 

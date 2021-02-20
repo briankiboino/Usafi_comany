@@ -112,7 +112,7 @@ class Home extends Component{
                      <div className='row'>
                      <div className='col-md-6'>
                          <div className='card bg-primary about-cards'>
-                             <div className='card inner-cards bg-light'>
+                             <div className='card inner-cards'>
                               <i className='fa fa-lightbulb-o' style={{color: '#C08EF3'}}></i>
                               <h5>Service request</h5>
                               <p>
@@ -123,7 +123,7 @@ class Home extends Component{
                      </div>
                      <div className='col-md-6 card_t'>
                          <div className='card bg-primary about-cards'>
-                             <div className='card inner-cards bg-light'>
+                             <div className='card inner-cards'>
                               <i className='fa fa-pie-chart' style={{color: '#66E9AF'}}></i>
                               <h5>Market your services</h5>
                               <p>
@@ -134,7 +134,7 @@ class Home extends Component{
                      </div>
                      <div className='col-md-6 card_c'>
                          <div className='card bg-primary about-cards'>
-                             <div className='card inner-cards bg-light'>
+                             <div className='card inner-cards'>
                              <i className='fa fa-star' style={{color: 'orange'}}></i>
                               <h5>Rate service</h5>
                               <p>Return feedback and also rate the services offered by the clients. You can also leave a detailed review of the expereince using the system. Effecient or does it need upgrades.</p>
@@ -143,7 +143,7 @@ class Home extends Component{
                      </div>
                      <div className='col-md-6 card_t'>
                          <div className='card bg-primary about-cards'>
-                         <div className='card inner-cards bg-light'>
+                         <div className='card inner-cards'>
                          <i className='fa fa-bar-chart' style={{color: '#838B83'}}></i>
                               <h5>Manage your brand</h5>
                               <p>Manage service requests made to your company. Manage orders and clients. Schedule client services. Generate weekly, monthly, yearly reports.</p>

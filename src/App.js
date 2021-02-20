@@ -9,10 +9,10 @@ import Contact from './components/contact';
 import Signin from './components/signin';
 import Totop from './components/to_top';
 import Forgot from './components/forgot';
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'; 
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'; 
 
 function App() {
+  const history = useHistory();
   return (
     <Router>
       <Switch>

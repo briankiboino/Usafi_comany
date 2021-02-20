@@ -4,111 +4,222 @@ import rocket from '../images/rocket.svg';
 import desk from '../images/desk.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'; 
 
-class Signin extends Component {
+var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-    constructor(props){
-        super(props)
+class Signin extends Component{
+  /*Handling the animation  */
+  changeTologin(){
+    this.setState({
+      emailError: '',
+      passwordError: ''
+    })
+    const container = document.querySelector(".sign-in-up");
+    container.classList.add("sign-up-mode");
+  }
+  changeToregister(){
+    this.setState({
+      nameError: '',
+      n_emailError: '',
+      n_passwordError: ''
+    })
+    const container = document.querySelector(".sign-in-up");
+    container.classList.remove("sign-up-mode");
+  }
 
-        this.state = {
-            email: '',
-            password: '',
-            n_email: '',
-            n_password: '',
-        }
+  constructor(props){
+    super(props)
+
+    this.state = {
+      
+      name: '',
+      email: '',
+      password: '',
+      n_email: '',
+      n_password: '',
+      nameError: '',
+      emailError: '',
+      passwordError: '',
+      n_emailError: '',
+      n_passwordError: '',
+     
     }
 
-    handlerSignin = (event) => {
+    this.handleSigninchange = this.handleRegisterchange.bind(this);
+    this.handleRegisterchange = this.handleRegisterchange.bind(this);
+    this.handleSignin = this.handleSignin.bind(this);
+    this.handleRegister = this.handleRegister.bind(this);
+
+  }
+
+    /*Handling change state*/
+    handleSigninchange = (event) => {
+      this.setState({
+          [event.target.name]: event.target.value
+      })
+
+    }
+    handleRegisterchange = (event) => {
+      this.setState({
+          [event.target.name]: event.target.value
+      })
+    }
+
+    /*Handling signing in form*/
+    handleSignin(event){
+        event.preventDefault();
+        const u_email = this.state.email;
+        const u_password = this.state.password;
+        var data = {
+          email: u_email,
+          password: u_password
+        }
+       
+        if(u_email === '' && u_password === ''){
           this.setState({
-            [event.target.name]: event.target.value,
+            emailError: 'Email is required!',
+            passwordError: 'Password is required!'
           })
-    }
-    
-    handlerSubmitsignin = (event) => {
-        if(this.state.email === ""){
-            alert("Email cannot be empty!!");
         }
-        if(this.state.password === ""){
-            alert("Password cannot be empty!!");
+        else if(u_email === ''){
+          this.setState({
+            emailError: 'Email is required!'
+          })
         }
-        if(this.state.email !== null  && !this.state.password !== null){
-            var data = {
-              email: this.state.email,
-              password: this.state.password
+        else if(!u_email.match(mailformat)){
+          this.setState({
+            emailError: 'Invalid email format!'
+          })
+        }
+        else if(u_password === ''){
+          this.setState({
+            passwordError: 'Password is required!'
+          })
+        }
+        else if(u_password.length < 3){
+          this.setState({
+            passwordError: 'Password should have a minimum of 3 characters!'
+          })
+        }
+        else{ 
+          this.setState({
+            emailError: '',
+            passwordError: ''
+          })
+          axios.post('http://localhost:3001/api/users/login', data)
+          .then(function(res) {
+            let feedback = res.data;
+            if(feedback.success){
+                alert(feedback.message);
             }
-            console.log(data);
-            fetch("/api/users/login", {
-              method: "POST",
-              body: JSON.stringify(data),
-              headers: {
-                "Content-Type": "application/json"
-              },
-              credentials: "same-origin"
-            }).then(function(response) {
-              console.log(response.message)
-            }, function(error) {
-             console.log(error);
-            })
-            
-        }
+            else{
+              var snackBar = document.getElementById("snackbar");
+              snackBar.innerHTML = feedback.message;
+              snackBar.className = "show";
+              setTimeout(function(){ snackBar.className = snackBar.className.replace("show", ""); }, 6000);
+            }
+          })
+          .catch(error =>{
+              alert(error);
+          })  
+        } 
+    
     }
-
-    handlerRegister = (event) => {
+  
+    /*Handling registration form*/
+     handleRegister(event){
+      event.preventDefault();
+      const u_name = this.state.name;
+      const u_email = this.state.n_email;
+      const u_password = this.state.n_password;
+      var data = {
+        name: u_name,
+        email: u_email,
+        password: u_password
+      }
+     
+      if(u_name === '' && u_email === '' && u_password === ''){
         this.setState({
-          [event.target.name]: event.target.value,
+          nameError: 'Full name is required!',
+          n_emailError: 'Email is required!',
+          n_passwordError: 'Password is required!'
         })
-   }
-
-    handlerSubmitregister = (event) => {
-        if(this.state.n_email === ""){
-            alert("Email cannot be empty!!");
-        }
-        if(this.state.n_password === ""){
-            alert("Password cannot be empty!!");
-        }
-        if(this.state.n_email !== null  && !this.state.n_password !== null){
-            event.preventDefault();
-            axios.get('https://jsonplaceholder.typicode.com/posts', this.state)
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error =>{
-                console.log(console.error());
-            })
-        }
+      }
+      else if(u_name === ''){
+        this.setState({
+          nameError: 'Full name is required!'
+        })
+      }
+      else if(u_name.length < 3){
+        this.setState({
+          nameError: 'Name should have a minimum of 3 characters!'
+        })
+      }
+      else if(u_email === ''){
+        this.setState({
+          n_emailError: 'Email is required!'
+        })
+      }
+      else if(!u_email.match(mailformat)){
+        this.setState({
+          n_emailError: 'Invalid email format!'
+        })
+      }
+      else if(u_password === ''){
+        this.setState({
+          n_passwordError: 'Password is required!'
+        })
+      }
+      else if(u_password.length < 3){
+        this.setState({
+          n_passwordError: 'Password should have a minimum of 3 characters!'
+        })
+      }
+      else{ 
+        this.setState({
+          nameError: '',
+          n_emailError: '',
+          n_passwordError: ''
+        })
+          axios.post('http://localhost:3001/api/users/createUser', data)
+          .then(function(res) {
+            let feedback = res.data;
+            if(feedback.success){
+               alert(feedback.message)
+            }
+            else{
+              var snackBar = document.getElementById("snackbar");
+              snackBar.innerHTML = feedback.message;
+              snackBar.className = "show";
+              setTimeout(function(){ snackBar.className = snackBar.className.replace("show", ""); }, 3000);
+            }
+          })
+          .catch(error =>{
+              alert(error);   
+    })
+  }
     }
-
-    change(){
-        const sign_in_btn =document.querySelector("#sign-in-btn");
-        const sign_up_btn = document.querySelector("#sign-up-btn");
-        const container = document.querySelector(".sign-in-up");
-        
-        sign_up_btn.addEventListener("click", () => {
-          container.classList.add("sign-up-mode");
-        });
-        
-        sign_in_btn.addEventListener("click", () => {
-          container.classList.remove("sign-up-mode");
-        });
-    }
-
-    render(){
+     render(){
         return(
             <div className="container-fluid sign-in-up">
       <div className="forms-container">
         <div className="signin-signup">
-          <form action="#" className="sign-in-form">
+          <form key={1} action="#" className="sign-in-form" onSubmit={(event) => this.handleSignin(event)}>
             <h2 className="title">Sign in</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Email" name='email' value={this.state.email} onChange={this.handlerSignin}/>
+              <input type="text" placeholder="Email" name='email' value={this.state.email} onChange={(event) => this.handleSigninchange(event)}/>
             </div>
+            <p className='error'>{this.state.emailError}</p>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Password" name='password' value={this.state.password} onChange={this.handlerSignin}/>
+              <input type="password" placeholder="Password" name='password' value={this.state.password} onChange={(event) => this.handleSigninchange(event)}/>
             </div>
-            <input type="submit" value="Login" className="btn solid" onClick={() => this.handlerSubmitsignin()}/>
-            <Link to='/forgot' style={{ textDecoration: 'none' }}><a className='forgot-link'>Forgot password?</a></Link>
+            <p className='error'>{this.state.passwordError}</p>
+            <input type="submit" value="Login" className="btn solid"/>
+            <Link to='/forgot' style={{ textDecoration: 'none' }}>Forgot password?</Link>
             <p className="social-text">Or Sign in with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
@@ -125,17 +236,24 @@ class Signin extends Component {
               </a>
             </div>
           </form>
-          <form action="#" className="sign-up-form">
+          <form key={2} action="#" className="sign-up-form" onSubmit={(event) => this.handleRegister(event)}>
             <h2 className="title">Sign up</h2>
             <div className="input-field">
-              <i className="fas fa-envelope"></i>
-              <input type="text" placeholder="Email" name='n_email' value={this.state.n_email} onChange={this.handlerRegister}/>
+              <i className="fas fa-user"></i>
+              <input type="text" placeholder="Name" name='name' value={this.state.name} onChange={(event) => this.handleRegisterchange(event)}/>
             </div>
+            <p className='error'>{this.state.nameError}</p>
+            <div className="input-field">
+              <i className="fas fa-envelope"></i>
+              <input type="text" placeholder="Email" name='n_email' value={this.state.n_email} onChange={(event) => this.handleRegisterchange(event)}/>
+            </div>
+            <p className='error'>{this.state.n_emailError}</p>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="text" placeholder="Password" name='n_password' value={this.state.n_password} onChange={this.handlerRegister}/>
+              <input type="password" placeholder="Password" name='n_password' value={this.state.n_password} onChange={(event) => this.handleRegisterchange(event)}/>
             </div>
-            <input type="submit" className="btn" value="Sign up" onClick={() => this.handlerSubmitregister()}/>
+            <p className='error'>{this.state.n_passwordError}</p>
+            <input type="submit" name='form' className="btn" value="Sign up"/>
             <p className="social-text">Or Sign up with social platforms</p>
             <div className="social-media">
               <a href="#" className="social-icon">
@@ -162,7 +280,7 @@ class Signin extends Component {
             <p>
               Register an account with us today and start the journey!
             </p>
-            <button className="btn transparent" id="sign-up-btn" onClick={() => this.change()}>
+            <button className="btn transparent" id="sign-up-btn" onClick={() => this.changeTologin()}>
               Sign up
             </button>
           </div>
@@ -174,17 +292,18 @@ class Signin extends Component {
             <p>
               Sign in to your account to see the latests services and clients in the market.
             </p>
-            <button className="btn transparent" id="sign-in-btn" onClick={() => this.change()}>
+            <button className="btn transparent" id="sign-in-btn" onClick={() => this.changeToregister()}>
               Sign in
             </button>
           </div>
           <img src={desk} className="image" alt="" />
         </div>
       </div>
+      <div id="snackbar">{this.state.feedBack}</div>
     </div>
 
         )
     }
-}
+  }
 
 export default Signin;
