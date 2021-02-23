@@ -438,7 +438,7 @@ input.error {
   z-index: 1;
   left: 50%;
   bottom: 30px;
-  font-size: 17px;
+  font-size: 15px;
 }
 
 #snackbar.show {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { useState } from 'react';
 import '../signin_up.css';
 import rocket from '../images/rocket.svg';
 import desk from '../images/desk.svg';
@@ -9,185 +10,70 @@ import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router
 
 var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-class Signin extends Component{
-  /*Handling the animation  */
-  changeTologin(){
-    this.setState({
-      emailError: '',
-      passwordError: ''
-    })
+function Signin(){
+
+  //Handling the sliding animation
+  function changeTologin(){
     const container = document.querySelector(".sign-in-up");
     container.classList.add("sign-up-mode");
   }
-  changeToregister(){
-    this.setState({
-      nameError: '',
-      n_emailError: '',
-      n_passwordError: ''
-    })
+  function changeToregister(){
     const container = document.querySelector(".sign-in-up");
     container.classList.remove("sign-up-mode");
   }
 
-  constructor(props){
-    super(props)
+  //Initialising function that facilitates routing
+  let history = useHistory();
 
-    this.state = {
-      
-      name: '',
-      email: '',
-      password: '',
-      n_email: '',
-      n_password: '',
-      nameError: '',
-      emailError: '',
-      passwordError: '',
-      n_emailError: '',
-      n_passwordError: '',
-     
-    }
-
-    this.handleSigninchange = this.handleRegisterchange.bind(this);
-    this.handleRegisterchange = this.handleRegisterchange.bind(this);
-    this.handleSignin = this.handleSignin.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
-
-  }
-
-    /*Handling change state*/
-    handleSigninchange = (event) => {
-      this.setState({
-          [event.target.name]: event.target.value
-      })
-
-    }
-    handleRegisterchange = (event) => {
-      this.setState({
-          [event.target.name]: event.target.value
-      })
-    }
+  //The states which store the user input values
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [n_name, setnName] = useState('');
+  const [n_email, setnEmail] = useState('');
+  const [n_password, setnPassword] = useState('');
+  const [emailError, setemailError] = useState('');
+  const [passwordError, setpasswordError] = useState('');
+  const [nameError, setnameError] = useState('');
+  const [n_emailError, setnemailError] = useState('');
+  const [n_passwordError, setnpasswordError] = useState('');
 
     /*Handling signing in form*/
-    handleSignin(event){
+    const handleSignin = (event) => {
         event.preventDefault();
-        const u_email = this.state.email;
-        const u_password = this.state.password;
+        const u_email = email;
+        const u_password = password;
         var data = {
           email: u_email,
           password: u_password
         }
        
+        //Form is validate before data is sent to the api
         if(u_email === '' && u_password === ''){
-          this.setState({
-            emailError: 'Email is required!',
-            passwordError: 'Password is required!'
-          })
+          setemailError('Email is required!');
+          setpasswordError('Password is required!');
         }
         else if(u_email === ''){
-          this.setState({
-            emailError: 'Email is required!'
-          })
+           setemailError('Email is required!');
         }
         else if(!u_email.match(mailformat)){
-          this.setState({
-            emailError: 'Invalid email format!'
-          })
+           setemailError('Enter a valid email format!');
         }
         else if(u_password === ''){
-          this.setState({
-            passwordError: 'Password is required!'
-          })
+           setpasswordError('Password is required!');
         }
         else if(u_password.length < 3){
-          this.setState({
-            passwordError: 'Password should have a minimum of 3 characters!'
-          })
+          setpasswordError('Pass should have a minimum of 3 characters!');
         }
-        else{ 
-          this.setState({
-            emailError: '',
-            passwordError: ''
-          })
+        else{
+          setemailError('');
+          setpasswordError('');
           axios.post('http://localhost:3001/api/users/login', data)
           .then(function(res) {
             let feedback = res.data;
             if(feedback.success){
-                alert(feedback.message);
-            }
-            else{
-              var snackBar = document.getElementById("snackbar");
-              snackBar.innerHTML = feedback.message;
-              snackBar.className = "show";
-              setTimeout(function(){ snackBar.className = snackBar.className.replace("show", ""); }, 6000);
-            }
-          })
-          .catch(error =>{
-              alert(error);
-          })  
-        } 
-    
-    }
-  
-    /*Handling registration form*/
-     handleRegister(event){
-      event.preventDefault();
-      const u_name = this.state.name;
-      const u_email = this.state.n_email;
-      const u_password = this.state.n_password;
-      var data = {
-        name: u_name,
-        email: u_email,
-        password: u_password
-      }
-     
-      if(u_name === '' && u_email === '' && u_password === ''){
-        this.setState({
-          nameError: 'Full name is required!',
-          n_emailError: 'Email is required!',
-          n_passwordError: 'Password is required!'
-        })
-      }
-      else if(u_name === ''){
-        this.setState({
-          nameError: 'Full name is required!'
-        })
-      }
-      else if(u_name.length < 3){
-        this.setState({
-          nameError: 'Name should have a minimum of 3 characters!'
-        })
-      }
-      else if(u_email === ''){
-        this.setState({
-          n_emailError: 'Email is required!'
-        })
-      }
-      else if(!u_email.match(mailformat)){
-        this.setState({
-          n_emailError: 'Invalid email format!'
-        })
-      }
-      else if(u_password === ''){
-        this.setState({
-          n_passwordError: 'Password is required!'
-        })
-      }
-      else if(u_password.length < 3){
-        this.setState({
-          n_passwordError: 'Password should have a minimum of 3 characters!'
-        })
-      }
-      else{ 
-        this.setState({
-          nameError: '',
-          n_emailError: '',
-          n_passwordError: ''
-        })
-          axios.post('http://localhost:3001/api/users/createUser', data)
-          .then(function(res) {
-            let feedback = res.data;
-            if(feedback.success){
-               alert(feedback.message)
+                localStorage.setItem('token', feedback.token);
+                localStorage.setItem('email', feedback.email);
+                history.push('/forgot')
             }
             else{
               var snackBar = document.getElementById("snackbar");
@@ -197,28 +83,86 @@ class Signin extends Component{
             }
           })
           .catch(error =>{
-              alert(error);   
-    })
-  }
+              alert(error);
+          })  
+        } 
+    
     }
-     render(){
+
+    /*Handling signing in form*/
+    const handleRegister = (event) => {
+      event.preventDefault();
+      const u_name = n_name;
+      const u_email = n_email;
+      const u_password = n_password;
+      var data = {
+        name: u_name,
+        email: u_email,
+        password: u_password
+      }
+     
+      //Form is validate before data is sent to the api
+      if(u_name === '' && u_email === '' && u_password === ''){
+        setnameError('Full name is required!')
+        setnemailError('Email is required!');
+        setnpasswordError('Password is required!');
+      }
+      else if(u_name === ''){
+        setnameError('Full name is required!')
+      }
+      else if(u_email === ''){
+        setnemailError('Email is required!');
+      }
+      else if(!u_email.match(mailformat)){
+        setnemailError('Enter a valid email format!');
+      }
+      else if(u_password === ''){
+         setnpasswordError('Password is required!');
+      }
+      else if(u_password.length < 3){
+        setnpasswordError('Pass should have a minimum of 3 characters!');
+      }
+      else{
+        setnameError('')
+        setnemailError('');
+        setnpasswordError('');
+        axios.post('http://localhost:3001/api/users/createUser', data)
+        .then(function(res) {
+          let feedback = res.data;
+          if(feedback.success){
+              alert(feedback.message);
+          }
+          else{
+            var snackBar = document.getElementById("snackbar");
+            snackBar.innerHTML = feedback.message;
+            snackBar.className = "show";
+            setTimeout(function(){ snackBar.className = snackBar.className.replace("show", ""); }, 6000);
+          }
+        })
+        .catch(error =>{
+            alert(error);
+        })  
+      } 
+  
+  }
+  
         return(
             <div className="container-fluid sign-in-up">
       <div className="forms-container">
         <div className="signin-signup">
-          <form key={1} action="#" className="sign-in-form" onSubmit={(event) => this.handleSignin(event)}>
+          <form key={1} action="#" className="sign-in-form" onSubmit={(event) => handleSignin(event)}>
             <h2 className="title">Sign in</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Email" name='email' value={this.state.email} onChange={(event) => this.handleSigninchange(event)}/>
+              <input type="text" placeholder="Email" name='email' value={email} onChange={(event) => setEmail(event.target.value)}/>
             </div>
-            <p className='error'>{this.state.emailError}</p>
+            <p className='error'>{emailError}</p>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Password" name='password' value={this.state.password} onChange={(event) => this.handleSigninchange(event)}/>
+              <input type="password" placeholder="Password" name='password' value={password} onChange={(event) => setPassword(event.target.value)}/>
             </div>
-            <p className='error'>{this.state.passwordError}</p>
-            <input type="submit" value="Login" className="btn solid"/>
+            <p className='error'>{passwordError}</p>
+            <button type="submit" className="btn solid">Login <i className="fa fa-spinner fa-spin" id='loading'></i> </button>
             <Link to='/forgot' style={{ textDecoration: 'none' }}>Forgot password?</Link>
             <p className="social-text">Or Sign in with social platforms</p>
             <div className="social-media">
@@ -236,23 +180,23 @@ class Signin extends Component{
               </a>
             </div>
           </form>
-          <form key={2} action="#" className="sign-up-form" onSubmit={(event) => this.handleRegister(event)}>
+          <form key={2} action="#" className="sign-up-form" onSubmit={(event) => handleRegister(event)}>
             <h2 className="title">Sign up</h2>
             <div className="input-field">
               <i className="fas fa-user"></i>
-              <input type="text" placeholder="Name" name='name' value={this.state.name} onChange={(event) => this.handleRegisterchange(event)}/>
+              <input type="text" placeholder="Name" name='name' value={n_name} onChange={(event) => setnName(event.target.value)}/>
             </div>
-            <p className='error'>{this.state.nameError}</p>
+            <p className='error'>{nameError}</p>
             <div className="input-field">
               <i className="fas fa-envelope"></i>
-              <input type="text" placeholder="Email" name='n_email' value={this.state.n_email} onChange={(event) => this.handleRegisterchange(event)}/>
+              <input type="text" placeholder="Email" name='n_email' value={n_email} onChange={(event) => setnEmail(event.target.value)}/>
             </div>
-            <p className='error'>{this.state.n_emailError}</p>
+            <p className='error'>{n_emailError}</p>
             <div className="input-field">
               <i className="fas fa-lock"></i>
-              <input type="password" placeholder="Password" name='n_password' value={this.state.n_password} onChange={(event) => this.handleRegisterchange(event)}/>
+              <input type="password" placeholder="Password" name='n_password' value={n_password} onChange={(event) => setnPassword(event.target.value)}/>
             </div>
-            <p className='error'>{this.state.n_passwordError}</p>
+            <p className='error'>{n_passwordError}</p>
             <input type="submit" name='form' className="btn" value="Sign up"/>
             <p className="social-text">Or Sign up with social platforms</p>
             <div className="social-media">
@@ -280,7 +224,7 @@ class Signin extends Component{
             <p>
               Register an account with us today and start the journey!
             </p>
-            <button className="btn transparent" id="sign-up-btn" onClick={() => this.changeTologin()}>
+            <button className="btn transparent" id="sign-up-btn" onClick={() => changeTologin()}>
               Sign up
             </button>
           </div>
@@ -292,18 +236,17 @@ class Signin extends Component{
             <p>
               Sign in to your account to see the latests services and clients in the market.
             </p>
-            <button className="btn transparent" id="sign-in-btn" onClick={() => this.changeToregister()}>
+            <button className="btn transparent" id="sign-in-btn" onClick={() => changeToregister()}>
               Sign in
             </button>
           </div>
           <img src={desk} className="image" alt="" />
         </div>
       </div>
-      <div id="snackbar">{this.state.feedBack}</div>
+      <div id="snackbar"></div>
     </div>
 
         )
     }
-  }
 
 export default Signin;

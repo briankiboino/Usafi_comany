@@ -59,6 +59,10 @@ form.sign-in-form {
   z-index: 2;
 }
 
+.fa-spinner{
+  visibility: hidden;
+}
+
 .title {
   font-size: 2.2rem;
   color: #444;
