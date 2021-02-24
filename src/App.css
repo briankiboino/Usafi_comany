@@ -447,6 +447,36 @@ input.error {
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
 }
 
+#success-snackbar {
+  min-width: 250px;
+  background-color: rgb(76, 180, 62);
+  color: #FFF;
+  border-radius: 5px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 1%;
+  bottom: 30px;
+  font-size: 14px;
+  display: flex;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+#success-snackbar p{
+  font-size: 13px;
+}
+
+#success-snackbar i{
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+#success-snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
 @-webkit-keyframes fadein {
   from {bottom: 0; opacity: 0;} 
   to {bottom: 30px; opacity: 1;}
@@ -533,6 +563,129 @@ input.error {
 .footer .social-links a:hover{
   background: #18d26e;
   color: #fff;
+}
+/*User dashboard*/
+.user-dashboard{
+  padding: 80px;
+  border-radius: 10px;
+}
+.profile{
+  text-align: center;
+}
+.profile .dashboard-user-icon{
+  font-size: 100px;
+  margin-left: 10px;
+  color: #FFF;
+  align-self: center;
+}
+.profile-info{
+  text-align: center;
+}
+.profile-info .name{
+  margin-top: 5px;
+  margin-left: 10px;
+  font-size: 13px;
+  color: #FFF;
+}
+.profile-info .email{
+  margin-top: -20px;
+  margin-left: 10px;
+  font-size: 13px;
+  color: #FFF;
+}
+.signout-btn{
+  margin-left: 10px;
+}
+/* The side navigation menu */
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 300px;
+  background-color: #5995fd;
+  position: fixed;
+  height: 80%;
+  overflow: auto;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+ box-shadow: 0px 6px 12px -1px black;
+}
+.dashboard-title{
+  margin: 20px;
+}
+.sidebar .order-header{
+  margin: 20px;
+  color: #FFF;
+  font-size: 13px;
+}
+
+/* Sidebar links */
+.sidebar a {
+  display: flex;
+  color: #FFF;
+  padding: 16px;
+  margin:15px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 100;
+  font-size: 14px;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #dbf8dc;
+  color: #42a345;
+}
+.sidebar a.active i{
+  color: #42a345;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #FFF;
+  color: #FF8247;
+}
+.sidebar a:hover:not(.active) i{
+  color: #FF8247;
+}
+
+.sidebar-links{
+  color: #FFF;
+}
+
+.sidebar-links i{
+  margin-right: 12px;
+  font-size: 20px;
+  color: #FFF;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+.dashboard-content {
+  margin-left: 300px;
+  height: 80%;
+}
+.dashboard-nav{
+  height: 70px;
+  background: #FFF;
+  width: 100%;
+
+}
+.nav-header{
+  display: flex;
+  color: #000;
+}
+.nav-header i{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.current-section-title{
+  color: #FF8247;
+}
+.form-col{
+  border-right: solid 1px;
+  border-color: #E3E3E3;
+  height: 100%;
+}
+.dashboard-logo{
 }
 
 

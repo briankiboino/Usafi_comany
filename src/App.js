@@ -9,16 +9,17 @@ import Contact from './components/contact';
 import Signin from './components/signin';
 import Totop from './components/to_top';
 import Forgot from './components/forgot';
-import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'; 
+import Dashboard from './components/dashboard';
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom'; 
 
 function App() {
-  const history = useHistory();
   return (
     <Router>
       <Switch>
           <Route path='/signin' exact component={Signin}/>
           <Route path='/forgot' exact component={Forgot}/>
           <Route path='/contact' exact component={Contact}/>
+          <Route path='/dashboard' exact component={Dashboard}/>
           <div className="App">
               <Navigation />
               <Route path='/' exact component={Home}/>

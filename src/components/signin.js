@@ -1,23 +1,37 @@
-import React, { Component } from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import '../signin_up.css';
 import rocket from '../images/rocket.svg';
 import desk from '../images/desk.svg';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router-dom';
 import { BrowserRouter as Router, Switch, Route, useHistory } from 'react-router-dom'; 
-
-var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+import { useDispatch } from 'react-redux';
 
 function Signin(){
 
+  //Dispatch function
+  const dispatch = useDispatch();
+  //Function to initilise reducers during sign in
+  const activateReducers = () => {
+    return {
+      type: 'SIGN_IN'
+    };
+  }
+
+  //Format for email used in email validation
+  var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+
   //Handling the sliding animation
   function changeTologin(){
+    setemailError('');
+    setpasswordError('');
     const container = document.querySelector(".sign-in-up");
     container.classList.add("sign-up-mode");
   }
   function changeToregister(){
+    setnameError('')
+    setnemailError('');
+    setnpasswordError('');
     const container = document.querySelector(".sign-in-up");
     container.classList.remove("sign-up-mode");
   }
@@ -47,7 +61,7 @@ function Signin(){
           password: u_password
         }
        
-        //Form is validate before data is sent to the api
+        //Form is validated before data is sent to the api
         if(u_email === '' && u_password === ''){
           setemailError('Email is required!');
           setpasswordError('Password is required!');
@@ -70,11 +84,18 @@ function Signin(){
           axios.post('http://localhost:3001/api/users/login', data)
           .then(function(res) {
             let feedback = res.data;
+            //On sucess feedback
             if(feedback.success){
-                localStorage.setItem('token', feedback.token);
-                localStorage.setItem('email', feedback.email);
-                history.push('/forgot')
+                //Set the token and email to the session storage
+                sessionStorage.setItem('name', feedback.name);
+                sessionStorage.setItem('token', feedback.token);
+                sessionStorage.setItem('email', feedback.email);
+                //Activate the reducers
+                dispatch(activateReducers());
+                //Navigate to the user dashboard
+                history.push('/dashboard')
             }
+            //On failure
             else{
               var snackBar = document.getElementById("snackbar");
               snackBar.innerHTML = feedback.message;
@@ -83,13 +104,15 @@ function Signin(){
             }
           })
           .catch(error =>{
-              alert(error);
+            var snackBar = document.getElementById("snackbar");
+            snackBar.innerHTML = error;
+            snackBar.className = "show";
+            setTimeout(function(){ snackBar.className = snackBar.className.replace("show", ""); }, 3000);
           })  
         } 
-    
     }
 
-    /*Handling signing in form*/
+    /*Handling registration form*/
     const handleRegister = (event) => {
       event.preventDefault();
       const u_name = n_name;
@@ -101,7 +124,7 @@ function Signin(){
         password: u_password
       }
      
-      //Form is validate before data is sent to the api
+      //Form is validated before data is sent to the api
       if(u_name === '' && u_email === '' && u_password === ''){
         setnameError('Full name is required!')
         setnemailError('Email is required!');
@@ -140,7 +163,10 @@ function Signin(){
           }
         })
         .catch(error =>{
-            alert(error);
+          var snackBar = document.getElementById("snackbar");
+          snackBar.innerHTML = error;
+          snackBar.className = "show";
+          setTimeout(function(){ snackBar.className = snackBar.className.replace("show", ""); }, 3000);
         })  
       } 
   
