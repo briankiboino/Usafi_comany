@@ -87,7 +87,6 @@ function Signin(){
             //On sucess feedback
             if(feedback.success){
                 //Set the token and email to the session storage
-                sessionStorage.setItem('name', feedback.name);
                 sessionStorage.setItem('token', feedback.token);
                 sessionStorage.setItem('email', feedback.email);
                 //Activate the reducers

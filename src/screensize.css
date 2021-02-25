@@ -109,6 +109,10 @@
   }
       /* On screens that are less than 700px wide, make the sidebar into a topbar */
     @media screen and (max-width: 700px) {
+      .dashboard-content{
+        padding: 4rem 0.5rem 0.5rem 0.5rem;
+        font-size: 13px;
+      }
       .sidebar {
         width: 100%;
         height: auto;
@@ -120,8 +124,90 @@
 
     /* On screens that are less than 400px, display the bar vertically, instead of horizontally */
     @media screen and (max-width: 400px) {
+      .dashboard-content{
+        padding: 4rem 2rem 1rem 1rem;
+        font-size: 13px;
+      }
       .sidebar a {
         text-align: center;
         float: none;
       }
     }
+    @media screen and (max-width: 320px) {
+      .header__search {
+        width: 70%;
+      }
+      .dashboard-content{
+        padding: 4rem 2rem 1rem 1rem;
+        font-size: 13px;
+      }
+    }
+    
+    @media screen and (min-width: 768px) {
+      .dashboard-content{
+        padding: 5rem 1rem 4rem 5rem;
+        font-size: 15px;
+      }
+      .header {
+        padding: 0 3rem 0 6rem;
+      }
+      .header__container {
+        height: calc(var(--header-height) + .5rem);
+      }
+      .header__search {
+        width: 300px;
+        padding: .55rem .75rem;
+      }
+      .header__toggle {
+        display: none;
+      }
+      .header__logo {
+        display: block;
+      }
+      .header__img {
+        width: 40px;
+        height: 40px;
+        order: 1;
+      }
+      .nav {
+        left: 0;
+        padding: 1.2rem 1.5rem 0;
+        width: 68px; /* Reduced navbar */
+      }
+      .nav__items {
+        row-gap: 1.7rem;
+      }
+      .nav__icon {
+        font-size: 1.3rem;
+      }
+    
+      /* Element opacity */
+      .nav__logo-name, 
+      .nav__name, 
+      .nav__subtitle, 
+      .nav__dropdown-icon {
+        opacity: 0;
+        transition: .3s;
+      }
+      
+      
+      /* Navbar expanded */
+      .nav:hover {
+        width: var(--nav-width);
+      }
+      
+      /* Visible elements */
+      .nav:hover .nav__logo-name {
+        opacity: 1;
+      }
+      .nav:hover .nav__subtitle {
+        opacity: 1;
+      }
+      .nav:hover .nav__name {
+        opacity: 1;
+      }
+      .nav:hover .nav__dropdown-icon {
+        opacity: 1;
+      }
+    }
+    
